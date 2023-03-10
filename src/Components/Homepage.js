@@ -29,7 +29,7 @@ const Homepage = () => {
           .filter((country) => {
             return search.toLocaleLowerCase() === ""
               ? country
-              : country.name.toLocaleLowerCase().includes(search);
+              : country.name.toLocaleLowerCase().includes(search.toLocaleLowerCase());
           })
           .map((country) => {
             return (

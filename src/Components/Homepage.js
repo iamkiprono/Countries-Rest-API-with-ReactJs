@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import "../Components/Homepage.css";
 import { useState } from "react";
 
@@ -29,21 +28,16 @@ const Homepage = () => {
           .filter((country) => {
             return search.toLocaleLowerCase() === ""
               ? country
-              : country.name.toLocaleLowerCase().includes(search.toLocaleLowerCase());
+              : country.name
+                  .toLocaleLowerCase()
+                  .includes(search.toLocaleLowerCase());
           })
           .map((country) => {
             return (
-              <div className="country-card">
+              <div className="country-card" key ={country.name}>
                 <img src={country.flags.png} alt="" />
                 <div className="details">
-                  <h3
-                    className="countryName"
-                    onClick={() => {
-                      console.log(country.population);
-                    }}
-                  >
-                    Country: {country.name}
-                  </h3>
+                  <h3 className="countryName">Country: {country.name}</h3>
                   <p>Poulation: {country.population}</p>
                   <p>Region: {country.region}</p>
                   <p>Capital: {country.capital}</p>
@@ -51,18 +45,6 @@ const Homepage = () => {
               </div>
             );
           })}
-        {/* <div className="country-card">
-          <img
-            src="https://media.gettyimages.com/id/657672288/vector/flag-of-belgium.jpg?s=612x612&w=gi&k=20&c=KctGYXY1cVHL2vNc0KZWCiKXZNtCxxCewRFVCHp70U4="
-            alt=""
-          />
-          <div className="details">
-          <h3 className="countryName">Country: Germany</h3>
-          <p>Poulation: 8100000</p>
-          <p>Region: Europe</p>
-          <p>Capital: Berlin</p>
-          </div>
-        </div> */}
       </div>
     </div>
   );

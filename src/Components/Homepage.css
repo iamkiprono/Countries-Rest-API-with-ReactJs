@@ -10,8 +10,10 @@
 }
 .homepage {
   width: 100%;
+  
   min-height: 100vh;
   background: hsl(207, 26%, 17%);
+  margin: auto;
 }
 nav{
     display: flex;
@@ -42,7 +44,9 @@ img{
     object-fit: cover;
 }
 .country-wrapper{
-    margin: 0 60px;
+    max-width: 1440px;
+   
+    margin: auto;
     display: flex;
     gap: 60px;
     justify-content: center;

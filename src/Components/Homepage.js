@@ -26,18 +26,23 @@ const Homepage = () => {
       <div className="country-wrapper">
         {countries
           .filter((country) => {
-            return search.toLocaleLowerCase() === ""
+            return search.toLocaleLowerCase().trim() === ""
               ? country
               : country.name
                   .toLocaleLowerCase()
-                  .includes(search.toLocaleLowerCase());
+                  .includes(search.toLocaleLowerCase().trim());
           })
           .map((country) => {
             return (
-              <div className="country-card" key ={country.name}>
+              <div className="country-card" key={country.name}>
                 <img src={country.flags.png} alt="" />
                 <div className="details">
-                  <h3 className="countryName">Country: {country.name}</h3>
+                  <h3
+                    className="countryName"
+                    onClick={() => console.log(country.name)}
+                  >
+                    Country: {country.name}
+                  </h3>
                   <p>Poulation: {country.population}</p>
                   <p>Region: {country.region}</p>
                   <p>Capital: {country.capital}</p>

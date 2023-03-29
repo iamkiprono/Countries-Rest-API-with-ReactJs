@@ -4,6 +4,7 @@ import { useState } from "react";
 const Homepage = () => {
   const [countries, setCountries] = useState([]);
   const [search, setSearch] = useState("");
+  const [filterQuery, setFilterQuery] = useState("");
 
   fetch("data.json")
     .then((res) => res.json())
@@ -19,19 +20,26 @@ const Homepage = () => {
           <p>Dark Mode</p>
         </div>
       </nav>
-      <div className="search-bar" onChange={(e) => setSearch(e.target.value)}>
+      <div className="search-bar">
         <input type="text" placeholder="Search for a country..." />
+        <div className="dropdown">
+        <label for="region">Filter by Region</label>
+        <select onChange={(e) => setFilterQuery(e.target.value)}>
+          <option value="">All</option>
+          <option value="africa">Africa</option>
+          <option value="america">America</option>
+          <option value="asia">Asia</option>
+          <option value="europe">Europe</option>
+          <option value="oceania">Oceania</option>
+        </select>
+        </div>
       </div>
 
       <div className="country-wrapper">
         {countries
-          .filter((country) => {
-            return search.toLocaleLowerCase().trim() === ""
-              ? country
-              : country.name
-                  .toLocaleLowerCase()
-                  .includes(search.toLocaleLowerCase().trim());
-          })
+          .filter((country) =>
+            country.region.toLowerCase().includes(filterQuery.toLowerCase())
+          )
           .map((country) => {
             return (
               <div className="country-card" key={country.name}>

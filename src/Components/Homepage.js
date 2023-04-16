@@ -1,27 +1,29 @@
 import "../Components/Homepage.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Homepage = () => {
   const [countries, setCountries] = useState([]);
   const [search, setSearch] = useState("");
   const [filterQuery, setFilterQuery] = useState("");
+const getCountries = async () => {
+  const res = await fetch("data.json")
+  const data = await res.json()
+  setCountries(data)
+}
+  
 
-  fetch("data.json")
-    .then((res) => res.json())
-    .then((data) => {
-      setCountries(data);
-    });
+useEffect(()=> {
+  getCountries()
+},[])
 
   return (
     <div className="homepage">
       <nav>
         <h3>Where in the world?</h3>
-        <div className="theme">
-          <p>Dark Mode</p>
-        </div>
+        
       </nav>
       <div className="search-bar">
-        <input type="text" placeholder="Search for a country..." />
+        <input type="text" placeholder="Search for a country..." onChange={(e)=>setSearch(e.target.value)} />
         <div className="dropdown">
         <label for="region">Filter by Region</label>
         <select onChange={(e) => setFilterQuery(e.target.value)}>
@@ -38,8 +40,8 @@ const Homepage = () => {
       <div className="country-wrapper">
         {countries
           .filter((country) =>
-            country.region.toLowerCase().includes(filterQuery.toLowerCase())
-          )
+            country.name.toLowerCase().includes(search.toLowerCase())
+          ).filter((country) => country.region.toLowerCase().includes(filterQuery.toLowerCase()))
           .map((country) => {
             return (
               <div className="country-card" key={country.name}>

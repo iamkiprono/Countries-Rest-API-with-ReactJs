@@ -23,7 +23,7 @@ useEffect(()=> {
         
       </nav>
       <div className="search-bar">
-        <input type="text" placeholder="Search for a country..." onChange={(e)=>setSearch(e.target.value)} />
+        <input type="search" placeholder="Search for a country..." onChange={(e)=>setSearch(e.target.value)} />
         <div className="dropdown">
         <label for="region">Filter by Region</label>
         <select onChange={(e) => setFilterQuery(e.target.value)}>

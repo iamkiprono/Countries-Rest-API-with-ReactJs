@@ -53,7 +53,7 @@ useEffect(()=> {
                   >
                     Country: {country.name}
                   </h3>
-                  <p>Poulation: {country.population}</p>
+                  <p>Poulation: {country.population.toLocaleString()}</p>
                   <p>Region: {country.region}</p>
                   <p>Capital: {country.capital}</p>
                 </div>

@@ -78,3 +78,10 @@ option{
 select{
   background: hsl(207, 26%, 17%);
 }
+
+.dropdown{
+  margin: 30px  0;
+}
+.dropdown select{
+  padding: 10px 5px;
+}

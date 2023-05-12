@@ -89,13 +89,7 @@ select{
 
 //custom error message
 .error-box{
-  /* display: flex;
-  justify-content: center;
-  align-items: center;   
-  border: 1px solid #f5c6cb;
-  border-radius: 4px;
-  margin:auto; */
-  
+ 
 }
 .error-message {
   color: #721c24;

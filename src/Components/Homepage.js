@@ -5,10 +5,23 @@ const Homepage = () => {
   const [countries, setCountries] = useState([]);
   const [search, setSearch] = useState("");
   const [filterQuery, setFilterQuery] = useState("");
+  const [errorMessage, setErrorMessage] = useState(""); // new state for err message
 const getCountries = async () => {
-  const res = await fetch("data.json")
-  const data = await res.json()
-  setCountries(data)
+   try {
+      const res = await fetch("https://restcountries.com/v3.1/all");
+      if(res.ok){
+      const data = await res.json();
+       setCountries(data);
+       setErrorMessage(""); //Clear the error message if the fetch is succesfull
+      }else{
+        setErrorMessage('Error fething countries');
+
+      }     
+     
+    } catch (error) {
+      setErrorMessage('Error fething countries'); 
+    } 
+  
 }
   
 
@@ -37,21 +50,28 @@ useEffect(()=> {
         </div>
       </div>
 
+      {/* error message  */}
+        {errorMessage && (
+        <div className="error-box">
+          <p className="error-message">{errorMessage}</p>
+        </div>
+      )}
+
       <div className="country-wrapper">
         {countries
           .filter((country) =>
-            country.name.toLowerCase().includes(search.toLowerCase())
+            country.name.common.toLowerCase().includes(search.toLowerCase())
           ).filter((country) => country.region.toLowerCase().includes(filterQuery.toLowerCase()))
           .map((country) => {
             return (
-              <div className="country-card" key={country.name}>
+              <div className="country-card" key={country.name.common}>
                 <img src={country.flags.png} alt="" />
                 <div className="details">
                   <h3
                     className="countryName"
-                    onClick={() => console.log(country.name)}
+                    onClick={() => console.log(country.name.common)}
                   >
-                    Country: {country.name}
+                    Country: {country.name.common}
                   </h3>
                   <p>Poulation: {country.population.toLocaleString()}</p>
                   <p>Region: {country.region}</p>

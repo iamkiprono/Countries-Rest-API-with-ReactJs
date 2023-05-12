@@ -85,3 +85,19 @@ select{
 .dropdown select{
   padding: 10px 5px;
 }
+
+
+
+.error-box{
+ 
+}
+.error-message {
+  color: #721c24;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  background-color:white;
+  
+  padding:40px;
+  align-items:center;
+}

@@ -5,13 +5,21 @@ const Homepage = () => {
   const [countries, setCountries] = useState([]);
   const [search, setSearch] = useState("");
   const [filterQuery, setFilterQuery] = useState("");
+  const [errorMessage, setErrorMessage] = useState(""); // new state for err message
 const getCountries = async () => {
    try {
       const res = await fetch("https://restcountries.com/v3.1/all");
+      if(res.ok){
       const data = await res.json();
-      setCountries(data);
+       setCountries(data);
+       setErrorMessage(""); //Clear the error message if the fetch is succesfull
+      }else{
+        setErrorMessage('Error fething countries');
+
+      }     
+     
     } catch (error) {
-      console.log("Error fetching countries:", error);
+      setErrorMessage('Error fething countries'); 
     } 
   
 }
@@ -41,6 +49,13 @@ useEffect(()=> {
         </select>
         </div>
       </div>
+
+      {/* error message  */}
+        {errorMessage && (
+        <div className="error-box">
+          <p className="error-message">{errorMessage}</p>
+        </div>
+      )}
 
       <div className="country-wrapper">
         {countries

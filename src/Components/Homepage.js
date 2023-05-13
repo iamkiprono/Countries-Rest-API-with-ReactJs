@@ -63,12 +63,12 @@ useEffect(()=> {
             country.name.common.toLowerCase().includes(search.toLowerCase())
           ).filter((country) => country.region.toLowerCase().includes(filterQuery.toLowerCase()))
             .sort((a, b) => {
-            const nameA = a.name.common.toLowerCase();
-             const nameB = b.name.common.toLowerCase();
-              if (nameA < nameB) {
+            const nmA= a.name.common.toLowerCase();
+             const nmB = b.name.common.toLowerCase();
+              if (nmA < nmB) {
                return -1;
                }
-                 if (nameA > nameB) {
+                 if (nmA > nmB) {
                     return 1;
                }
                  return 0;

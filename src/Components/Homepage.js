@@ -62,6 +62,17 @@ useEffect(()=> {
           .filter((country) =>
             country.name.common.toLowerCase().includes(search.toLowerCase())
           ).filter((country) => country.region.toLowerCase().includes(filterQuery.toLowerCase()))
+            .sort((a, b) => {
+            const nameA = a.name.common.toLowerCase();
+             const nameB = b.name.common.toLowerCase();
+              if (nameA < nameB) {
+               return -1;
+               }
+                 if (nameA > nameB) {
+                    return 1;
+               }
+                 return 0;
+           })
           .map((country) => {
             return (
               <div className="country-card" key={country.name.common}>

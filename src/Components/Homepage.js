@@ -48,18 +48,29 @@ const Homepage = () => {
           </select>
         </div>
       </div>
-
       {/* error message  */}
       {errorMessage && (
         <div className="error-box">
           <p className="error-message">{errorMessage}</p>
         </div>
       )}
-
       <div className="country-wrapper">
         {countries
           .filter((country) =>
             country.name.common.toLowerCase().includes(search.toLowerCase())
+
+          ).filter((country) => country.region.toLowerCase().includes(filterQuery.toLowerCase()))
+            .sort((a, b) => {
+            const nmA= a.name.common.toLowerCase();
+             const nmB = b.name.common.toLowerCase();
+              if (nmA < nmB) {
+               return -1;
+               }
+                 if (nmA > nmB) {
+                    return 1;
+               }
+                 return 0;
+           })
           )
           .filter((country) =>
             country.region.toLowerCase().includes(filterQuery.toLowerCase())
